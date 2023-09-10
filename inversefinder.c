@@ -27,6 +27,7 @@
         }
 
         //Printing the given matrix
+        printf("\nYour Given matrix is : \n");
         for(int i=0 ; i<3 ; i++) {
             for(int j=0 ; j<3 ; j++) {
                 printf("%5d",matrix[i][j]);
@@ -35,29 +36,11 @@
             printf("\n");
         }
 
-        //confirming the given matrix
-        char confirmation[5];
-        printf("\nIs this your given matrix ?  --  Type (Yes/No) :");
-        fgets(confirmation,5,stdin);
+        
 
-        //Proceeding with given matrix ---OR--- Re-entering the matrix
-        if (confirmation == "Yes" || "yes") {
-
-            //calling the cofactorfinder function for the given matrix
-            cofactorfinder(matrix[][3] ,3);    
-        } 
-
-        else if (confirmation == "No" || "no") {
-            //going for re-collection of elements of matrix as per user's request
-            printf("\n Please re-enter correct matrix.....\n\n");
-            main();
-
-        }
-        else {
-            //procedure for invalid response
-            printf("\nYour response is not valid\nRestaring the program..........\n");
-            main();
-        }
+        //calling the cofactorfinder function for the given matrix
+        cofactorfinder(matrix,3);    
+        
 
         return 0;
     }
@@ -71,19 +54,19 @@
         int cofactor[3][3];
 
         //calculating and filling up 1st row cofactors 
-        cofactor[0][0]= (1) * (matrix[0][0]) * ((matrix[1][1] * matrix[2][2]) - (matrix[1][2] * matrix[2][1]));
-        cofactor[0][1]= (-1) * (matrix[0][1]) * ((matrix[1][0] * matrix[2][2]) - (matrix[2][0] * matrix[1][2]));
-        cofactor[0][2]= (1) * (matrix[0][2]) * ((matrix[1][0] * matrix[2][1]) - (matrix[1][1] * matrix[2][0]));
+        cofactor[0][0]= (1) * ((matrix[1][1] * matrix[2][2]) - (matrix[1][2] * matrix[2][1]));
+        cofactor[0][1]= (-1) * ((matrix[1][0] * matrix[2][2]) - (matrix[2][0] * matrix[1][2]));
+        cofactor[0][2]= (1) * ((matrix[1][0] * matrix[2][1]) - (matrix[1][1] * matrix[2][0]));
 
         //calculating and filling up 2nd row cofactors
-        cofactor[1][0]= (-1) * (matrix[1][0]) * ((matrix[0][1] * matrix[2][2]) - (matrix[0][2] * matrix[2][1]));
-        cofactor[1][1]= (1) * (matrix[1][1]) * ((matrix[0][0] * matrix[2][2]) - (matrix[0][2] * matrix[2][0]));
-        cofactor[1][2]= (-1) * (matrix[1][2]) * ((matrix[0][0] * matrix[2][1]) - (matrix[0][1] * matrix[2][0]));
+        cofactor[1][0]= (-1) * ((matrix[0][1] * matrix[2][2]) - (matrix[0][2] * matrix[2][1]));
+        cofactor[1][1]= (1) * ((matrix[0][0] * matrix[2][2]) - (matrix[0][2] * matrix[2][0]));
+        cofactor[1][2]= (-1) * ((matrix[0][0] * matrix[2][1]) - (matrix[0][1] * matrix[2][0]));
 
         //calculating and filling up 3rd row cofactors
-        cofactor[2][0]= (1) * (matrix[2][0]) * ((matrix[0][1] * matrix[1][2]) - (matrix[0][2] * matrix[1][1]));
-        cofactor[2][1]= (-1) * (matrix[2][1]) * ((matrix[0][0] * matrix[1][2]) - (matrix[0][2] * matrix[1][0]));
-        cofactor[2][2]= (1) * (matrix[2][2]) * ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]));
+        cofactor[2][0]= (1) * ((matrix[0][1] * matrix[1][2]) - (matrix[0][2] * matrix[1][1]));
+        cofactor[2][1]= (-1) * ((matrix[0][0] * matrix[1][2]) - (matrix[0][2] * matrix[1][0]));
+        cofactor[2][2]= (1) * ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]));
 
         //calling the adjoint finder functio wit arguments as the given matrix and the cofactors
         adjointfinder(matrix , 3, cofactor ,3);
@@ -125,7 +108,7 @@
 
         printf("\n");
 
-
+        printf("The determinant of the given matrix is : %d \n",determinantfinder(matrix,n));
 
         // Now calling our inversefinder funcion
         inversefinder(adjoint,3 ,matrix,n);
@@ -156,10 +139,14 @@
 
             for(int j=0 ; j<3 ; j++) {
 
-                printf("\t%.2ff",inverse[i][j]);
+                printf("\t%.1f",inverse[i][j]);
             }
             printf("\n");
         }
+        
+        printf("\n\n");
+
+        main();
 
         
     }
